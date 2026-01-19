@@ -1,58 +1,4 @@
-"use client";
-
-import { useState } from "react";
-
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    email: "",
-    country: "",
-    productInterest: "",
-    message: "",
-  });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-
-    try {
-      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        setFormData({
-          name: "",
-          company: "",
-          email: "",
-          country: "",
-          productInterest: "",
-          message: "",
-        });
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
-
   return (
     <section id="contact" className="py-12 lg:py-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -194,7 +140,11 @@ export default function Contact() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              action="https://formspree.io/f/mdaagwze"
+              method="POST"
+              className="space-y-6"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -208,8 +158,6 @@ export default function Contact() {
                     id="name"
                     name="name"
                     required
-                    value={formData.name}
-                    onChange={handleChange}
                     className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                   />
                 </div>
@@ -225,8 +173,6 @@ export default function Contact() {
                     id="company"
                     name="company"
                     required
-                    value={formData.company}
-                    onChange={handleChange}
                     className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                   />
                 </div>
@@ -245,8 +191,6 @@ export default function Contact() {
                     id="email"
                     name="email"
                     required
-                    value={formData.email}
-                    onChange={handleChange}
                     className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                   />
                 </div>
@@ -262,8 +206,6 @@ export default function Contact() {
                     id="country"
                     name="country"
                     required
-                    value={formData.country}
-                    onChange={handleChange}
                     className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                   />
                 </div>
@@ -280,8 +222,6 @@ export default function Contact() {
                   id="productInterest"
                   name="productInterest"
                   required
-                  value={formData.productInterest}
-                  onChange={handleChange}
                   className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                 >
                   <option value="">Select a category</option>
@@ -307,8 +247,6 @@ export default function Contact() {
                   name="message"
                   required
                   rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
                   placeholder="Please describe your requirements, including estimated volumes and any specific grading or sorting preferences."
                   className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                 />
@@ -317,26 +255,11 @@ export default function Contact() {
               <div>
                 <button
                   type="submit"
-                  disabled={status === "submitting"}
-                  className="w-full rounded-md bg-linear-to-r from-sky-600 to-emerald-500 px-6 py-3 text-base font-semibold text-white hover:from-sky-700 hover:to-emerald-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full rounded-md bg-linear-to-r from-sky-600 to-emerald-500 px-6 py-3 text-base font-semibold text-white hover:from-sky-700 hover:to-emerald-600 transition-all"
                 >
-                  {status === "submitting" ? "Sending..." : "Send Inquiry"}
+                  Send Inquiry
                 </button>
               </div>
-
-              {status === "success" && (
-                <div className="p-4 bg-emerald-50 text-emerald-700 rounded-md text-sm">
-                  Thank you for your inquiry. We will respond within 24-48
-                  business hours.
-                </div>
-              )}
-
-              {status === "error" && (
-                <div className="p-4 bg-red-50 text-red-700 rounded-md text-sm">
-                  There was an error sending your message. Please try again or
-                  email us directly at info@magnumglobal.ca.
-                </div>
-              )}
             </form>
           </div>
         </div>
