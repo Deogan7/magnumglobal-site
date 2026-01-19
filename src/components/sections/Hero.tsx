@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 w-100 h-100 bg-emerald-100 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/3" />
       <div className="absolute top-1/2 left-1/2 w-75 h-75 bg-amber-50 rounded-full blur-3xl opacity-70" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-24">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-24 lg:pb-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 tracking-tight leading-[1.1]">
