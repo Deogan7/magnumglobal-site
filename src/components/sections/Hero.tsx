@@ -1,5 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useScrollAnimation } from "@/src/hooks/useScrollAnimation";
+import { useCountUp } from "@/src/hooks/useCountUp";
+
+function AnimatedStat({ end, suffix, label }: { end: number; suffix: string; label: string }) {
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.5 });
+  const count = useCountUp({ end, duration: 2000, enabled: isVisible });
+
+  return (
+    <div ref={ref} className="text-center sm:text-left">
+      <p className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-sky-600 to-emerald-500">
+        {count}{suffix}
+      </p>
+      <p className="mt-1 text-sm text-slate-500">{label}</p>
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
@@ -50,18 +68,9 @@ export default function Hero() {
 
             {/* Stats */}
             <div className="mt-16 grid grid-cols-3 gap-8">
-              <div className="text-center sm:text-left">
-                <p className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-sky-600 to-emerald-500">40+</p>
-                <p className="mt-1 text-sm text-slate-500">Countries Served</p>
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-sky-600 to-emerald-500">100K+</p>
-                <p className="mt-1 text-sm text-slate-500">Tons Annually</p>
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-sky-600 to-emerald-500">15+</p>
-                <p className="mt-1 text-sm text-slate-500">Years Experience</p>
-              </div>
+              <AnimatedStat end={40} suffix="+" label="Countries Served" />
+              <AnimatedStat end={100} suffix="K+" label="Tons Annually" />
+              <AnimatedStat end={25} suffix="+" label="Years Experience" />
             </div>
           </div>
 

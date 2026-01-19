@@ -1,3 +1,7 @@
+"use client";
+
+import { ScrollReveal } from "@/src/components/ui/ScrollReveal";
+
 const reasons = [
   {
     title: "Canadian Reliability",
@@ -130,32 +134,33 @@ export default function Why() {
   return (
     <section id="why" className="py-12 lg:py-20 bg-slate-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-            Why Magnum Global
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            A trusted Canadian partner for international textile buyers seeking
-            consistency, quality, and reliability.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+              Why Magnum Global
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              A trusted Canadian partner for international textile buyers seeking
+              consistency, quality, and reliability.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="mt-12 lg:mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reasons.map((reason) => (
-            <div
-              key={reason.title}
-              className="group relative rounded-2xl border border-slate-200/80 bg-white/90 p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-sky-200 hover:shadow-lg"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-700 ring-1 ring-sky-100 transition-colors group-hover:bg-emerald-50 group-hover:text-emerald-700 group-hover:ring-emerald-100">
-                {reason.icon}
+          {reasons.map((reason, index) => (
+            <ScrollReveal key={reason.title} delay={(index % 3) + 1}>
+              <div className="group relative rounded-2xl border border-slate-200/80 bg-white/90 p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-sky-200 hover:shadow-lg h-full">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-700 ring-1 ring-sky-100 transition-colors group-hover:bg-emerald-50 group-hover:text-emerald-700 group-hover:ring-emerald-100">
+                  {reason.icon}
+                </div>
+                <h3 className="mt-5 text-lg font-semibold text-slate-900">
+                  {reason.title}
+                </h3>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                  {reason.description}
+                </p>
               </div>
-              <h3 className="mt-5 text-lg font-semibold text-slate-900">
-                {reason.title}
-              </h3>
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                {reason.description}
-              </p>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
